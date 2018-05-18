@@ -1,12 +1,9 @@
 package org.restapi.persistence.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Issue implements Serializable {
@@ -15,90 +12,88 @@ public class Issue implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    private String title;
 
-    private String user;
+    @ManyToOne
+    private Category category;
 
-    private String address;
+    private String description;
 
-    private int grade;
+    @OneToMany(mappedBy="issue")
+    private List<Photo> photos;
 
-    public Issue() {
-        super();
-    }
+    private Integer longitude;
 
-    public Issue(final String name) {
-        super();
+    private Integer latitude;
 
-        this.name = name;
-    }
     public Long getId() {
         return id;
     }
-    public void setId(final Long id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
-    }
-    public void setName(final String name) {
-        this.name = name;
+
+    public String getTitle() {
+        return title;
     }
 
-    public String getUser() {
-        return user;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public Category getCategory() {
+        return category;
     }
 
-    public String getAddress() {
-        return address;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getDescription() {
+        return description;
     }
 
-    public int getGrade() {
-        return grade;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
+    public Integer getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Integer longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Integer latitude) {
+        this.latitude = latitude;
     }
 
     @Override
     public int hashCode() {
         final int prime = 27;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        final Issue other = (Issue) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Issue [name=").append(name).append("]");
+        builder.append("Issue [name=").append(title).append("]");
         return builder.toString();
     }
 
