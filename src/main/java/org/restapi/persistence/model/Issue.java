@@ -1,6 +1,7 @@
 package org.restapi.persistence.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.*;
@@ -22,9 +23,9 @@ public class Issue implements Serializable {
     @OneToMany(mappedBy="issue")
     private List<Photo> photos;
 
-    private Integer longitude;
+    private BigDecimal longitude;
 
-    private Integer latitude;
+    private BigDecimal latitude;
 
     public Long getId() {
         return id;
@@ -66,19 +67,19 @@ public class Issue implements Serializable {
         this.photos = photos;
     }
 
-    public Integer getLongitude() {
+    public BigDecimal getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
     }
 
-    public Integer getLatitude() {
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 

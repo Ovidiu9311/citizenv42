@@ -1,9 +1,12 @@
 package org.restapi.web.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.restapi.persistence.model.Category;
 import org.restapi.persistence.model.Issue;
 import org.restapi.persistence.service.IIssueService;
 import org.restapi.web.exception.MyResourceNotFoundException;
@@ -53,10 +56,27 @@ public class IssueController {
         return resourceById;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value="/getAll", method = RequestMethod.GET)
     @ResponseBody
     public List<Issue> findAll() {
-        return service.findAll();
+        List<Issue> issues = new ArrayList<>();
+        Issue issue = new Issue();
+        issue.setId(1l);
+        issue.setCategory(new Category());
+        issue.setDescription("Description1");
+        issue.setLatitude(new BigDecimal(44.368278));
+        issue.setLongitude(new BigDecimal(26.0549761));
+        issue.setTitle("Marker1");
+        Issue issue2 = new Issue();
+        issue2.setId(2l);
+        issue2.setCategory(new Category());
+        issue2.setDescription("Description2");
+        issue2.setLatitude(new BigDecimal(44.4045858));
+        issue2.setLongitude(new BigDecimal(26.0671294));
+        issue2.setTitle("Marker2");
+        issues.add(issue);
+        issues.add(issue2);
+        return issues;
     }
 
     @RequestMapping(method = RequestMethod.POST)
