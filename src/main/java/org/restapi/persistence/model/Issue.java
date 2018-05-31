@@ -23,9 +23,9 @@ public class Issue implements Serializable {
     @OneToMany(mappedBy="issue")
     private List<Photo> photos;
 
-    private BigDecimal longitude;
+    private float longitude;
 
-    private BigDecimal latitude;
+    private float latitude;
 
     public Long getId() {
         return id;
@@ -67,19 +67,20 @@ public class Issue implements Serializable {
         this.photos = photos;
     }
 
-    public BigDecimal getLongitude() {
+
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 
-    public BigDecimal getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
@@ -89,6 +90,7 @@ public class Issue implements Serializable {
         int result = 1;
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
+
     }
 
     @Override

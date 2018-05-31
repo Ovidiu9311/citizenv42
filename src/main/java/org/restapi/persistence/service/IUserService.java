@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IUserService extends IOperations<User> {
 
-    User retrieveByName(String name);
+    //User retrieveByName(String name);
 
     Page<User> findPaginated(Pageable pageable);
 

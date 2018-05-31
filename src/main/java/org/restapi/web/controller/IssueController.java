@@ -56,7 +56,7 @@ public class IssueController {
         return resourceById;
     }
 
-    @RequestMapping(value="/getAll", method = RequestMethod.GET)
+    @RequestMapping(value="/getAll", method = RequestMethod.POST)
     @ResponseBody
     public List<Issue> findAll() {
         List<Issue> issues = new ArrayList<>();
@@ -64,15 +64,15 @@ public class IssueController {
         issue.setId(1l);
         issue.setCategory(new Category());
         issue.setDescription("Description1");
-        issue.setLatitude(new BigDecimal(44.368278));
-        issue.setLongitude(new BigDecimal(26.0549761));
+        issue.setLatitude(44.368278f);
+        issue.setLongitude(26.0549761f);
         issue.setTitle("Marker1");
         Issue issue2 = new Issue();
         issue2.setId(2l);
         issue2.setCategory(new Category());
         issue2.setDescription("Description2");
-        issue2.setLatitude(new BigDecimal(44.4045858));
-        issue2.setLongitude(new BigDecimal(26.0671294));
+        issue2.setLatitude(44.4045858f);
+        issue2.setLongitude(26.0671294f);
         issue2.setTitle("Marker2");
         issues.add(issue);
         issues.add(issue2);

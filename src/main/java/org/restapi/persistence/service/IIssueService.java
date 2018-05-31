@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IIssueService extends IOperations<Issue> {
 
-    Issue retrieveByName(String name);
+    //Issue retrieveByName(String name);
     
     Page<Issue> findPaginated(Pageable pageable);
 

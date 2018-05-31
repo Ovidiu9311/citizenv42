@@ -31,10 +31,10 @@ protected PagingAndSortingRepository<User, Long> getDao() {
 }
 
 
-@Override
-public User retrieveByName(final String name) {
-        return dao.retrieveByName(name);
-}
+//@Override
+//public User retrieveByName(final String name) {
+//        return dao.retrieveByName(name);
+//}
 
 @Override
 @Transactional(readOnly = true)

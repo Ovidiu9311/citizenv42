@@ -32,10 +32,10 @@ public class IssueService extends AbstractService<Issue> implements IIssueServic
     }
 
 
-    @Override
-    public Issue retrieveByName(final String name) {
-        return dao.retrieveByName(name);
-    }
+//    @Override
+//    public Issue retrieveByName(final String name) {
+//        return dao.retrieveByName(name);
+//    }
 
     @Override
     @Transactional(readOnly = true)
