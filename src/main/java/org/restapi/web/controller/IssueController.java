@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.restapi.persistence.dto.IssueDto;
 import org.restapi.persistence.model.Category;
 import org.restapi.persistence.model.Issue;
 import org.restapi.persistence.service.IIssueService;
@@ -18,14 +19,10 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.google.common.base.Preconditions;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value = "/issue")
@@ -79,14 +76,16 @@ public class IssueController {
         return issues;
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public Issue create(@RequestBody final Issue resource, final HttpServletResponse response) {
-        Preconditions.checkNotNull(resource);
-        final Issue issue = service.create(resource);
-        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
-        return issue;
+    public Issue create(@RequestBody IssueDto issueDto, HttpServletResponse response) {
+        int x = 1+1;
+//        Preconditions.checkNotNull(resource);
+//        final Issue issue = service.create(resource);
+//        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
+        return null;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
