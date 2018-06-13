@@ -10,13 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.restapi.web.util.LinkUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriTemplate;
 
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/upload")
 public class RootController {
 
     public RootController() {
@@ -34,6 +33,17 @@ public class RootController {
         uris.add(linkToIsuue);
         uris.add(linkToUser);
         response.addHeader("Links", uris.toString());
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public void testMethod(@RequestParam MultipartFile file, HttpServletResponse response) {
+        int x = 1+1;
+//        Preconditions.checkNotNull(resource);
+//        final Issue issue = service.create(resource);
+//        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
     }
 
 }
