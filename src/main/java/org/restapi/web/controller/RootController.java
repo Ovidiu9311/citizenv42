@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.restapi.web.util.LinkUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,12 @@ public class RootController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void testMethod(@RequestParam MultipartFile file, HttpServletResponse response) {
+    public void testMethod(@RequestParam() String file, HttpServletResponse response) {
+        if(Base64.isBase64(file)) {
+            System.out.println("Is not base64");
+        }
+        byte[] imageByte= Base64.decodeBase64(file);
+
         int x = 1+1;
 //        Preconditions.checkNotNull(resource);
 //        final Issue issue = service.create(resource);
