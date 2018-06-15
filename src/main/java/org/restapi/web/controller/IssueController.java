@@ -77,15 +77,16 @@ public class IssueController {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public Issue create(@RequestBody IssueDto issueDto, HttpServletResponse response) {
+    public String create(@RequestBody IssueDto issueDto, HttpServletResponse response) {
         int x = 1+1;
 //        Preconditions.checkNotNull(resource);
 //        final Issue issue = service.create(resource);
 //        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
-        return null;
+        return "{\"balance\": \"1000\"}";
+
     }
 
     @RequestMapping(method = RequestMethod.PUT)

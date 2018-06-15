@@ -40,11 +40,11 @@ public class RootController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void testMethod(@RequestParam() String file, HttpServletResponse response) {
-        if(Base64.isBase64(file)) {
-            System.out.println("Is not base64");
-        }
-        byte[] imageByte= Base64.decodeBase64(file);
+    public void testMethod(@RequestParam MultipartFile file, HttpServletResponse response) {
+//        if(Base64.isBase64(file)) {
+//            System.out.println("Is not base64");
+//        }
+//        byte[] imageByte= Base64.decodeBase64(file);
 
         int x = 1+1;
 //        Preconditions.checkNotNull(resource);
