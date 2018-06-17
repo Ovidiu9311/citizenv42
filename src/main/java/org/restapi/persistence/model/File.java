@@ -1,12 +1,6 @@
 package org.restapi.persistence.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -26,8 +20,9 @@ public class File implements Serializable{
     @Column(name="issue_id")
     private Long issueId;
 
-    @Transient
-    private String fileBaseName;
+    @Lob
+    @Column(name="fileByte")
+    private byte[] fileByte;
 
     public Long getId() {
         return id;
@@ -61,11 +56,11 @@ public class File implements Serializable{
         this.issueId = issueId;
     }
 
-    public String getFileBaseName() {
-        return fileBaseName;
+    public byte[] getFileByte() {
+        return fileByte;
     }
 
-    public void setFileBaseName(String fileBaseName) {
-        this.fileBaseName = fileBaseName;
+    public void setFileByte(byte[] fileByte) {
+        this.fileByte = fileByte;
     }
 }
