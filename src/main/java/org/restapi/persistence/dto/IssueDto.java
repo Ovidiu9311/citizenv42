@@ -2,6 +2,8 @@ package org.restapi.persistence.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class IssueDto {
 
     private Long id;
@@ -12,12 +14,10 @@ public class IssueDto {
 
     private String description;
 
+    private Float longitude;
 
-    private MultipartFile photos;
+    private Float latitude;
 
-    //private float longitude;
-
-    //private float latitude;
 
     public Long getId() {
         return id;
@@ -51,27 +51,19 @@ public class IssueDto {
         this.description = description;
     }
 
-//    public MultipartFile getPhotos() {
-//        return photos;
-//    }
-//
-//    public void setPhotos(MultipartFile photos) {
-//        this.photos = photos;
-//    }
+    public Float getLongitude() {
+        return longitude;
+    }
 
-//    public float getLongitude() {
-//        return longitude;
-//    }
-//
-////    public void setLongitude(float longitude) {
-////        this.longitude = longitude;
-////    }
-////
-////    public float getLatitude() {
-////        return latitude;
-////    }
-//
-//    public void setLatitude(float latitude) {
-//        this.latitude = latitude;
-//    }
+    public void setLongitude(Float longitude) {
+        this.longitude = longitude;
+    }
+
+    public Float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Float latitude) {
+        this.latitude = latitude;
+    }
 }

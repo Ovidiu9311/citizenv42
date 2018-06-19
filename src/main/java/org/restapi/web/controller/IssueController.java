@@ -53,26 +53,11 @@ public class IssueController {
         return resourceById;
     }
 
-    @RequestMapping(value="/getAll", method = RequestMethod.POST)
+    @CrossOrigin
+    @RequestMapping(value="/getAll", method = RequestMethod.GET)
     @ResponseBody
     public List<Issue> findAll() {
-        List<Issue> issues = new ArrayList<>();
-        Issue issue = new Issue();
-        issue.setId(1l);
-        issue.setCategory(new Category());
-        issue.setDescription("Description1");
-        issue.setLatitude(44.368278f);
-        issue.setLongitude(26.0549761f);
-        issue.setTitle("Marker1");
-        Issue issue2 = new Issue();
-        issue2.setId(2l);
-        issue2.setCategory(new Category());
-        issue2.setDescription("Description2");
-        issue2.setLatitude(44.4045858f);
-        issue2.setLongitude(26.0671294f);
-        issue2.setTitle("Marker2");
-        issues.add(issue);
-        issues.add(issue2);
+        List<Issue> issues = service.findAll();
         return issues;
     }
 
@@ -80,12 +65,16 @@ public class IssueController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public String create(@RequestBody IssueDto issueDto, HttpServletResponse response) {
-        int x = 1+1;
-//        Preconditions.checkNotNull(resource);
-//        final Issue issue = service.create(resource);
-//        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
-        return "{\"balance\": \"1000\"}";
+    public Issue create(@RequestBody IssueDto issueDto, HttpServletResponse response) {
+        Preconditions.checkNotNull(issueDto);
+        Issue issue = new Issue();
+        issue.setTitle(issueDto.getTitle());
+        issue.setDescription(issueDto.getDescription());
+        issue.setLatitude(issueDto.getLatitude());
+        issue.setLongitude(issueDto.getLongitude());
+        service.create(issue);
+        eventPublisher.publishEvent(new ResourceCreatedEvent(this, response, issue.getId()));
+        return issue;
 
     }
 

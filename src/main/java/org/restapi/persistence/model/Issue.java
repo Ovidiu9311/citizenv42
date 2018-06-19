@@ -20,9 +20,6 @@ public class Issue implements Serializable {
 
     private String description;
 
-    @OneToMany(mappedBy="issue")
-    private List<Photo> photos;
-
     private float longitude;
 
     private float latitude;
@@ -58,15 +55,6 @@ public class Issue implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
 
     public float getLongitude() {
         return longitude;

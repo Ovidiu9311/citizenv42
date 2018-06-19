@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,17 +26,31 @@ public class FileUploadController {
     @RequestMapping(value="/upload", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public void testMethod(@RequestParam MultipartFile file) {
+    public void testMethod(@RequestParam MultipartFile file, @RequestParam("issueId") Long issueId) {
         File fileToUpload = new File();
-        fileToUpload.setFileName(file.getOriginalFilename());
         fileToUpload.setFileExtension(file.getOriginalFilename().split("\\.")[1]);
-        fileToUpload.setIssueId(1l);
+        fileToUpload.setIssueId(issueId);
         try {
             fileToUpload.setFileByte(file.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
         fileService.create(fileToUpload);
+        // with that all the photo files will have different names
+        fileToUpload.setFileName(fileToUpload.getId() + file.getOriginalFilename());
+        fileService.update(fileToUpload);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value="getPhotosUrl/{issueId}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<String> getPhotosUrl(@PathVariable("issueId") final Long issueId){
+      List<File> files = fileService.getFilesByIssue(issueId);
+        ArrayList<String> filesUrl = new ArrayList<>();
+        for(File file : files){
+            filesUrl.add("file/image/"+file.getId());
+        }
+      return filesUrl;
     }
 
     @CrossOrigin
@@ -43,7 +58,7 @@ public class FileUploadController {
     @ResponseBody
     public List<File> getFiles(@PathVariable("issueId") final Long issueId){
         int x= 1;
-      return fileService.getFilesByIssue(issueId);
+        return fileService.getFilesByIssue(issueId);
     }
 
     @CrossOrigin
