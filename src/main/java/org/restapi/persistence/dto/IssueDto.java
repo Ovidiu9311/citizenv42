@@ -1,8 +1,6 @@
 package org.restapi.persistence.dto;
 
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 public class IssueDto {
 
