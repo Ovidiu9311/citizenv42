@@ -3,6 +3,7 @@ package org.restapi.web.controller;
 import org.restapi.persistence.model.File;
 import org.restapi.persistence.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ public class FileUploadController {
 
     @Autowired
     IFileService fileService;
+
 
     @CrossOrigin
     @RequestMapping(value="/upload", method = RequestMethod.POST)
@@ -44,11 +49,14 @@ public class FileUploadController {
     @CrossOrigin
     @RequestMapping(value="getPhotosUrl/{issueId}", method = RequestMethod.GET)
     @ResponseBody
-    public List<String> getPhotosUrl(@PathVariable("issueId") final Long issueId){
+    public List<String> getPhotosUrl(@PathVariable("issueId") final Long issueId, HttpServletRequest request){
       List<File> files = fileService.getFilesByIssue(issueId);
         ArrayList<String> filesUrl = new ArrayList<>();
+        String serverName = request.getServerName();
+        String scheme = request.getScheme();
+        int portNumber = request.getServerPort();
         for(File file : files){
-            filesUrl.add("file/image/"+file.getId());
+            filesUrl.add(scheme + "://" + serverName + ":" + portNumber + "/file/image/"+file.getId());
         }
       return filesUrl;
     }

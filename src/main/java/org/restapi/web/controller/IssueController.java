@@ -45,6 +45,7 @@ public class IssueController {
         return 2l;
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Issue findById(@PathVariable("id") final Long id, final HttpServletResponse response) {
